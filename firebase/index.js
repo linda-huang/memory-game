@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://memory-game-49def.firebaseio.com',
+  databaseURL: 'https://memory-game-85f8d.firebaseio.com',
 });
 
 const db = admin.firestore();
