@@ -9,5 +9,14 @@
   }
   
 .card { 
-    margin-right: 20px  
+    margin-right: 20px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
+.userPrompt{
+  background: rgb(128, 134, 216);
+  color: white;
+  font-size: 1em;
+  align-items: center;
+  font-family: 'Quicksand', sans-serif;
 }
