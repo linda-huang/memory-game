@@ -26,8 +26,9 @@ export default function MemoryCard ({numFlip, imgURL, alt, defaultPic, updateNum
     }
 
     return(
-        <div className='card'>
-            <img src={currentPic} alt={alt} key={alt} width="200" height="200" onClick={juggleImage}/>
-        </div>
+        <figure>
+                <img src={currentPic} alt={alt} key={alt} onClick={juggleImage} className="gallery_image"/>
+        </figure>
+        
     )
 }

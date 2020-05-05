@@ -10,9 +10,7 @@ import '../../App.css';
 
 export default function AllCards () {
 
-    const numImg = 4;
-    const [imgList, setImgList] = useState([]);
-    // const [imgList, setImgList] = useState([mountain, tree, pavilion, lanterns]);
+    const [imgList, setImgList] = useState([mountain, mountain,tree, tree, tree, tree, tree, tree, tree, tree, tree, tree, tree, pavilion, lanterns]);
     const [numFlip, setNumFlip] = useState(0);
     const [flippedImgs, setFlippedImgs] = useState([]);
     const [dbimgList, setdbImgList] = useState([
@@ -53,13 +51,13 @@ export default function AllCards () {
         generateImgList(numImg);
         return(
             imgList.map((img, index) =>(
-                <MemoryCard 
-                    numFlip = {numFlip} 
-                    updateFlippedImgs = {(input) => setFlippedImgs(input)}
-                    updateNumFlip = {(input) => setNumFlip(input)} 
-                    imgURL = {img} 
-                    alt={index} 
-                    defaultPic={cornell}/>
+                    <MemoryCard 
+                        numFlip = {numFlip} 
+                        updateFlippedImgs = {(input) => setFlippedImgs(input)}
+                        updateNumFlip = {(input) => setNumFlip(input)} 
+                        imgURL = {img} 
+                        alt={index} 
+                        defaultPic={cornell}/>
                 )
             )
         )
@@ -67,8 +65,8 @@ export default function AllCards () {
 
     return (
         <div>
-            <div className='cardContainer'>
-                {generateAllCards()}
+            <div className ="gallery">
+                    {generateAllCards()}
             </div>
             <UserPrompt className='userPrompt' numFlip = {numFlip}/>
         </div>
