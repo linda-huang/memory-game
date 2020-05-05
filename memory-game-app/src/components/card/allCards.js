@@ -23,11 +23,11 @@ export default function AllCards () {
         }
     ]);
     
-    const fetchDBImage = () => {
+    useEffect(() => {
         fetch('http://localhost:8080/post')
                 .then(res => res.json())
                 .then(data => setdbImgList(data));
-    }
+    }, [])
 
     function generateImgList(num){
             fetchDBImage();
