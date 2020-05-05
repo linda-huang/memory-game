@@ -53,8 +53,13 @@ export default function AllCards () {
         generateImgList(numImg);
         return(
             imgList.map((img, index) =>(
-                <MemoryCard numFlip = {numFlip} updateFlippedImgs = {(input) => setFlippedImgs(input)}
-                    updateNumFlip = {(input) => setNumFlip(input)} imgURL = {img} alt={index} defaultPic={cornell}/>
+                <MemoryCard 
+                    numFlip = {numFlip} 
+                    updateFlippedImgs = {(input) => setFlippedImgs(input)}
+                    updateNumFlip = {(input) => setNumFlip(input)} 
+                    imgURL = {img} 
+                    alt={index} 
+                    defaultPic={cornell}/>
                 )
             )
         )
