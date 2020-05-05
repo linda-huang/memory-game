@@ -10,45 +10,23 @@ import '../../App.css';
 
 export default function AllCards () {
 
-    const [imgList, setImgList] = useState([mountain, mountain,tree, tree, tree, tree, tree, tree, tree, tree, tree, tree, tree, pavilion, lanterns]);
+    const [imgList, setImgList] = useState([
+        mountain, mountain, tree, tree, pavilion, pavilion, lanterns, lanterns]);
     const [numFlip, setNumFlip] = useState(0);
     const [flippedImgs, setFlippedImgs] = useState([]);
-    const [dbimgList, setdbImgList] = useState([
-        {
-            "name" : '',
-            "url" : '',
-            "id" : ''
-        }
-    ]);
-    
+
     useEffect(() => {
-        fetch('http://localhost:8080/post')
-                .then(res => res.json())
-                .then(data => setdbImgList(data));
+        var i;
+        for (i = 0; i < imgList.length; i++){
+            console.log(i);
+            const ram = Math.floor(Math.random() * imgList.length);
+            var temp = imgList[i];
+            imgList[i] = imgList[ram];
+            imgList[ram] = temp;
+        }
     }, [])
 
-    function generateImgList(num){
-            fetchDBImage();
-        console.log(dbimgList);
-        var i;
-        for (i = 0; i < num; i++){
-            const len = dbimgList.length;
-            const ram = Math.floor(Math.random() * len);
-            // imgList[i] = (dbimgList[ram].url);
-        }
-    }
-
-    // useEffect((num) => {
-    //     var i;
-    //     for (i = 0; i < num; i++){
-    //         const ram = Math.floor(Math.random() * dbimgList.length);
-    //         setImgList(dbimgList[ram].url);
-    //     }
-    // })
-
-
     const generateAllCards = () => {
-        generateImgList(numImg);
         return(
             imgList.map((img, index) =>(
                     <MemoryCard 
