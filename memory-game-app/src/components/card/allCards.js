@@ -14,6 +14,8 @@ export default function AllCards () {
         mountain, mountain, tree, tree, pavilion, pavilion, lanterns, lanterns]);
     const [numFlip, setNumFlip] = useState(0);
     const [flippedImgs, setFlippedImgs] = useState([]);
+    const [init, setInit] = useState(1);
+    const timeout = setTimeout(() => setInit(0), 3000);
 
     useEffect(() => {
         var i;
@@ -26,16 +28,21 @@ export default function AllCards () {
         }
     }, [])
 
+
     const generateAllCards = () => {
         return(
             imgList.map((img, index) =>(
-                    <MemoryCard 
+                (init) ? 
+                    (<figure>
+                        <img src={img} width='200' height='200'></img>
+                    </figure>) :
+                    (<MemoryCard 
                         numFlip = {numFlip} 
                         updateFlippedImgs = {(input) => setFlippedImgs(input)}
                         updateNumFlip = {(input) => setNumFlip(input)} 
                         imgURL = {img} 
                         alt={index} 
-                        defaultPic={cornell}/>
+                        defaultPic={cornell}/>)
                 )
             )
         )
