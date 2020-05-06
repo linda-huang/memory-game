@@ -1,4 +1,5 @@
 .cardContainer{
+    width: 100vw;
     display: flex;
     /* flex-grow: 1, flex-shrink: 1, flex-basis: 0*/
     flex: 1;
@@ -9,17 +10,18 @@
   }
   
 .card { 
+    /* gives each component inside the container equal space*/
+    flex: 1;
     margin-right: 20px;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap'); */
 .userPrompt{
-  background: rgb(128, 134, 216);
-  color: white;
-  font-size: 1em;
-  align-items: center;
-  font-family: 'Quicksand', sans-serif;
-}
+  color: rgb(13, 100, 154);
+  font-size: large;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+};
 
 .row{
   display: flex;
@@ -34,7 +36,7 @@
 
 .gallery{
   display: grid;
-  grid-template-columns: repeat(6, 227px);
+  grid-template-columns: repeat(4, 227px);
   /* grid-template-rows : repeat(2, 100px); */
   grid-gap: 5px;
 }
