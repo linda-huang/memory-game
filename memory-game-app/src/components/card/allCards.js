@@ -15,18 +15,38 @@ export default function AllCards () {
     const [numFlip, setNumFlip] = useState(0);
     const [flippedImgs, setFlippedImgs] = useState([]);
     const [init, setInit] = useState(1);
-    const [dbimglist, setdbImgList] = useState([]);
+    const [dataAcquired, setDataAcquired] = useState(0);
     const timeout = setTimeout(() => setInit(0), 3000);
+    const interval = setInterval(randomization, 300);
+    const [dbimgList, setdbImgList] = useState([
+        {
+            'name' : '',
+            "url" : "",
+            "id" : ""
+        }
+    ]);
 
     useEffect(() => {
-        var i;
-        for (i = 0; i < dbimgList.length; i++){
-            const ram = Math.floor(Math.random() * dbimgList.length);
-            var temp = dbimgList[i];
-            dbimgList[i] = dbimgList[ram];
-            dbimgList[ram] = temp;
-        }
+        fetch('http://localhost:8080/post')
+                .then(res => res.json())
+                .then(data => setdbImgList(data));
+        
+        setDataAcquired(1);
     }, [])
+
+    function randomization(){
+        if(dataAcquired == 1){
+            var i;
+            for (i = 0; i < dbimgList.length; i++){
+                const ram = Math.floor(Math.random() * dbimgList.length);
+                var temp = dbimgList[i];
+                dbimgList[i] = dbimgList[ram];
+                dbimgList[ram] = temp;
+            }
+            setDataAcquired(0);
+            clearInterval(interval);
+        }
+    }
 
     const generateAllCards = () => {
         return(
@@ -39,7 +59,7 @@ export default function AllCards () {
                         numFlip = {numFlip} 
                         updateFlippedImgs = {(input) => setFlippedImgs(input)}
                         updateNumFlip = {(input) => setNumFlip(input)} 
-                        imgURL = {img.url} 
+                        imgURL = {img.url}
                         alt={index} 
                         defaultPic={cornell}/>)
                 )
