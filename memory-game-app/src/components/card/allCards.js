@@ -29,16 +29,16 @@ export default function AllCards () {
                 .then(data => setdbImgList(data));
     }, [])
 
-    function generateImgList(num){
-            fetchDBImage();
-        console.log(dbimgList);
-        var i;
-        for (i = 0; i < num; i++){
-            const len = dbimgList.length;
-            const ram = Math.floor(Math.random() * len);
-            // imgList[i] = (dbimgList[ram].url);
-        }
-    }
+    // function generateImgList(num){
+    //         fetchDBImage();
+    //     console.log(dbimgList);
+        // var i;
+        // for (i = 0; i < num; i++){
+            // const len = dbimgList.length;
+            // const ram = Math.floor(Math.random() * len);
+            // imgList[i] = (dbimgList[i].url);
+    //     }
+    // }
 
     // useEffect((num) => {
     //     var i;
@@ -48,13 +48,14 @@ export default function AllCards () {
     //     }
     // })
 
+    console.log(dbimgList.url);
 
     const generateAllCards = () => {
-        generateImgList(numImg);
+        // generateImgList(numImg);
         return(
-            imgList.map((img, index) =>(
+            dbimgList.map((img, index) =>(
                 <MemoryCard numFlip = {numFlip} updateFlippedImgs = {(input) => setFlippedImgs(input)}
-                    updateNumFlip = {(input) => setNumFlip(input)} imgURL = {img} alt={index} defaultPic={cornell}/>
+                    updateNumFlip = {(input) => setNumFlip(input)} imgURL = {img.url} alt={index} defaultPic={cornell}/>
                 )
             )
         )
