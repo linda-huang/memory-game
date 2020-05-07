@@ -30,7 +30,6 @@ export default function AllCards () {
         fetch('http://localhost:8080/post')
                 .then(res => res.json())
                 .then(data => setdbImgList(data));
-        
         setDataAcquired(1);
     }, [])
 
