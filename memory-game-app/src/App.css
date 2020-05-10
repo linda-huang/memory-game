@@ -36,7 +36,7 @@
 
 .gallery{
   display: grid;
-  grid-template-columns: repeat(4, 227px);
+  grid-template-columns: repeat(5, 285px);
   /* grid-template-rows : repeat(2, 100px); */
   grid-gap: 5px;
 }

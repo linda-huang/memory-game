@@ -4,9 +4,9 @@ import Authenticated from './components/authentication/authenticated';
 
 function App() {
   return (
-    // <Authenticated>
+    <Authenticated>
       <AllCards/>
-    // </Authenticated>
+    </Authenticated>
   )
 }
 
