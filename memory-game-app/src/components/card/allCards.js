@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import MemoryCard from './memoryCard';
 import UserPrompt from './userPrompts'
 import mountain from '../images/mountain.jpg';
@@ -11,34 +11,83 @@ import '../../App.css';
 
 export default function AllCards () {
 
-    const [imgList, setImgList] = useState({
-        'guessingPic': [mountain, tree, pavilion, lanterns, tree, mountain, pavilion, lanterns],
-        'defaultPic' : cornell,
-        'winPic' : victory
-    });
     const [numFlip, setNumFlip] = useState(0);
     const [flippedImgs, setFlippedImgs] = useState([]);
+    const [init, setInit] = useState(1);
+    const [dataAcquired, setDataAcquired] = useState(0);
+    const timeout = setTimeout(() => setInit(0), 3000);
+    const interval = setInterval(randomization, 300);
+
     const [victoryIndex, setVictoryIndex] = useState([]);
     const [totalVictory, setTotalVictory] = useState(false);
 
+    const [dbimgList, setdbImgList] = useState([
+        {
+            'name' : '',
+            "url" : "",
+            "id" : ""
+        }
+    ]);
+
+    useEffect(() => {
+        fetch('http://localhost:8080/post')
+                .then(res => res.json())
+                .then(data => setdbImgList(data));
+        setDataAcquired(1);
+    }, [])
+
+    function randomization(){
+        if(dataAcquired == 1){
+            var i;
+            for (i = 0; i < dbimgList.length; i++){
+                const ram = Math.floor(Math.random() * dbimgList.length);
+                var temp = dbimgList[i];
+                dbimgList[i] = dbimgList[ram];
+                dbimgList[ram] = temp;
+            }
+            setDataAcquired(0);
+            clearInterval(interval);
+        }
+    }
+
     const generateAllCards = () => {
         return(
-            imgList.guessingPic.map((img, index) => (
-                (victoryIndex.includes(index)) ?
+            dbimgList.map((img, index) =>(
+                (init) ? 
+                    (<figure>
+                        <img src={img.url} width='200' height='200'></img>
+                    </figure>) :
+                    ((victoryIndex.includes(index)) ?
                         (<figure>
-                            <img src={imgList.winPic} alt={index} key={index} width="200" height="200"/>
+                            <img src={victory} alt={index} key={index} width="200" height="200"/>
                         </figure>) :
-                        (<MemoryCard numFlip = {numFlip} 
-                            alt = {index} 
-                            flippedImgs = {flippedImgs}   
-                            updateFlippedImgs = {(input) => setFlippedImgs(input)}
-                            updateNumFlip = {(input) => setNumFlip(input)} 
-                            imgURL = {img} 
-                            otherURL={imgList}/>)
-                    )
+                    (<MemoryCard 
+                        numFlip = {numFlip} 
+                        flippedImgs = {flippedImgs}
+                        updateFlippedImgs = {(input) => setFlippedImgs(input)}
+                        updateNumFlip = {(input) => setNumFlip(input)} 
+                        imgURL = {img.url}
+                        alt={index} 
+                        defaultPic={cornell}/>))
                 )
+            )
         )
     }
+
+    // const generateAllCards = () => {
+    //     return(
+    //         imgList.guessingPic.map((img, index) => (
+    //             (victoryIndex.includes(index)) ?
+    //                     (<figure>
+    //                         <img src={imgList.winPic} alt={index} key={index} width="200" height="200"/>
+    //                     </figure>) :
+    //                     (<MemoryCard numFlip = {numFlip} 
+    //                         alt = {index} 
+    //                         flippedImgs = {flippedImgs}   
+    //                         updateFlippedImgs = {(input) => setFlippedImgs(input)}
+    //                         updateNumFlip = {(input) => setNumFlip(input)} 
+    //                         imgURL = {img} 
+    //                         otherURL={imgList}/>)
  
     const compareImgs = () => {
             if (numFlip === 2 && flippedImgs.length !== 0) {
@@ -48,13 +97,11 @@ export default function AllCards () {
                     setFlippedImgs([]);
                     setNumFlip(0);
                 }
-            console.log(flippedImgs)
-            console.log(victoryIndex)
             }
             };
 
     const isVictory = () => {
-        if (totalVictory === false && victoryIndex.length === imgList.guessingPic.length) {
+        if (totalVictory === false && victoryIndex.length === dbimgList.length) {
             setTotalVictory(true);
         }
     }

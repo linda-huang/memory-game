@@ -1,11 +1,12 @@
 {
-    "name": "memory-game",
-    "version": "0.1.0",
-    "main": "index.js",
-    "license": "MIT",
-    "dependencies": {
-      "body-parser": "^1.18.3",
-      "express": "^4.16.4",
-      "firebase-admin": "^7.2.0"
-    }
+  "name": "memory-game",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "firebase-admin": "^7.2.0"
   }
+}
