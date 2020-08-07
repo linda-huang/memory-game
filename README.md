@@ -1,4 +1,4 @@
-# memory-game
+# Memory Game
 
 A memory game featuring an randomly generated sequence of images. Pair all the images correctly by clicking on each image to win the game!
 
