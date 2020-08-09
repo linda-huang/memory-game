@@ -1,6 +1,8 @@
 # Memory Game
 
+<p align="center">
 <img src="./readme_assets/memory_game.gif"/> 
+</p>
 
 A memory game featuring an randomly generated sequence of images. Pair all the images correctly by clicking on each image to win the game!
 
